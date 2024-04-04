@@ -8,6 +8,10 @@ from datetime import datetime
 
 
 def do_pack():
+    """
+       Generates a .tgz archvive containing all the files in web_static
+       directory
+    """
     try:
         local('mkdir versions')
         now = datetime.now()
