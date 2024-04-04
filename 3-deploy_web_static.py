@@ -25,7 +25,9 @@ def do_pack():
 
         local("tar -cvzf versions/{} web_static".format(archive_name))
 
-        return "versions/{}".format(archive_name)
+        filename = "versions/{}".format(archive_name)
+        local(print("web_static packed: {}".format(filename)))
+        return filename
     except Exception:
         return None
 
