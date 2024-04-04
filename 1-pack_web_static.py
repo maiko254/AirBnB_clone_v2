@@ -13,14 +13,15 @@ def do_pack():
        directory
     """
     try:
-        local('mkdir versions')
+        local('mkdir -p versions')
         now = datetime.now()
 
         timestamp = now.strftime("%Y%m%d%H%M%S")
         archive_name = "web_static" + timestamp + ".tgz"
 
         local("tar -cvzf versions/{} web_static".format(archive_name))
-
-        return("versions/{}".format(archive_name))
+        filename = "versions/{}".format(archive_name)
+        local(print("web_static packed: {}".format(filename)))
+        return filename
     except Exception:
-        return(None)
+        return None
