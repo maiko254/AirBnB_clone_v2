@@ -7,19 +7,22 @@ from sqlalchemy.orm import relationship
 from models.review import Review
 from models.amenity import Amenity
 
-place_amenity = Table("place_amenity", Base.metadata,
-                      Column("place_id", String(60), ForeignKey('places.id',
-                             onupdate="CASCADE", ondelete="CASCADE"),
-                             nullable=False),
-                      Column("amenity_id", String(60),
-                             ForeignKey('amenities.id', onupdate="CASCADE",
-                                        ondelete="CASCADE"), nullable=False))
+if models.storage_type == 'db':
+    place_amenity = Table("place_amenity", Base.metadata,
+                          Column("place_id", String(60),
+                                 ForeignKey('places.id', onupdate="CASCADE",
+                                 ondelete="CASCADE"), nullable=False),
+                          Column("amenity_id", String(60),
+                                 ForeignKey('amenities.id',
+                                            onupdate="CASCADE",
+                                            ondelete="CASCADE"),
+                                 nullable=False))
 
 
 class Place(BaseModel, Base):
     """ A place to stay """
-    __tablename__ = 'places'
     if models.storage_type == 'db':
+        __tablename__ = 'places'
         city_id = Column(String(60), ForeignKey('cities.id',
                          ondelete="CASCADE"), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id',

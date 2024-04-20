@@ -57,6 +57,10 @@ class FileStorage:
         except FileNotFoundError:
             pass
 
+    def close(self):
+        """ """
+        self.reload()
+
     def delete(self, obj=None):
         """ Deletes object from FileStorage.__objects dictionary """
         if obj:

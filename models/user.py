@@ -8,8 +8,8 @@ from sqlalchemy.orm import relationship
 
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
-    __tablename__ = 'users'
     if models.storage_type == 'db':
+        __tablename__ = 'users'
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
         first_name = Column(String(128), nullable=True)
@@ -21,3 +21,6 @@ class User(BaseModel, Base):
         password = ''
         first_name = ''
         last_name = ''
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
