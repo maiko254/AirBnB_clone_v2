@@ -8,8 +8,8 @@ import models
 
 class Amenity(BaseModel, Base):
     """ Defines class to store the amenities found in an AirBnB house """
-    __tablename__ = "amenities"
     if models.storage_type == 'db':
+        __tablename__ = "amenities"
         name = Column(String(128), nullable=False)
         place_amenities = relationship("Place", secondary="place_amenity")
     else:
